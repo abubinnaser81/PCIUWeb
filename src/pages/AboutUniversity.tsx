@@ -140,7 +140,7 @@ const AboutUniversity = () => {
                 <p className="text-xs text-muted-foreground mb-4">Start your journey towards excellence</p>
                 <a
                   href="/admission"
-                  className="inline-flex items-center gap-2 bg-accent text-accent-foreground font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-accent/90 transition-colors"
+                  className="inline-flex items-center gap-2 bg-highlight text-highlight-foreground font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-highlight/90 transition-colors"
                 >
                   Apply Now
                   <ChevronRight className="w-4 h-4" />

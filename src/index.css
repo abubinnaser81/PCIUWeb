@@ -29,12 +29,12 @@ All colors MUST be HSL.
     --secondary-light: 230 60% 90%;
 
     /* Accent - Gold #DBA22E */
-    --accent: 40 70% 52%;
+    --accent: 196 99% 47%;
     --accent-foreground: 0 0% 100%;
     --accent-light: 40 60% 90%;
 
     /* Highlight - Gold for emphasis */
-    --highlight: 40 70% 52%;
+    --highlight: 196 99% 47%;
     --highlight-foreground: 0 0% 100%;
 
     --muted: 230 20% 95%;
