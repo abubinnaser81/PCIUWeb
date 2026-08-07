@@ -136,20 +136,23 @@ const DepartmentBBA = () => {
   const contact = mergeContent(DEFAULTS.contact, activeContent.contact);
   const quickLinks = activeContent.quickLinks?.length ? activeContent.quickLinks : DEFAULTS.quickLinks;
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchFaculty = async () => {
       setIsLoadingFaculty(true);
       try {
         const { data, error } = await supabase.rpc('get_public_faculty_profiles');
-        if (error) { if (import.meta.env.DEV) console.error('Error fetching faculty:', error); }
+        console.log('Faculty RPC data:', data);
+        console.log('Faculty RPC error:', error);
+        if (error) { console.error('Error fetching faculty:', error); }
         else {
           const deptFaculty = (data || []).filter(
-            (f: any) => f.department === 'Department of Business Administration'
+            (f: any) => f.department?.trim().toLowerCase() === 'department of business administration'
           );
+          console.log('Filtered BBA faculty:', deptFaculty);
           setFacultyMembers(deptFaculty);
         }
       } catch (err) {
-        if (import.meta.env.DEV) console.error('Error:', err);
+        console.error('Error:', err);
       } finally {
         setIsLoadingFaculty(false);
       }

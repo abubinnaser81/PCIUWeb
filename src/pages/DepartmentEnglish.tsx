@@ -15,6 +15,12 @@ export const ENGLISH_DEFAULTS = {
     title: "Department of English",
     subtitle: "Nurturing critical thinkers and effective communicators for a globalized world.",
   },
+   stats: [
+    { value: "500+", label: "Graduates" },
+    { value: "10", label: "Faculty Members" },
+    { value: "10", label: "Programs Offered" },
+    { value: "20+", label: "Publications" },
+  ],
   chairman: {
     name: "Dr. Sarah Rahman",
     designation: "Associate Professor & Head",
@@ -66,6 +72,7 @@ const DepartmentEnglish = () => {
   const activeContent = editMode?.isEditMode ? (editMode.content || {}) : dbContent;
 
   const hero = mergeContent(DEFAULTS.hero, activeContent.hero);
+  const stats = activeContent.stats?.length ? activeContent.stats : DEFAULTS.stats;
   const chairman = mergeContent(DEFAULTS.chairman, activeContent.chairman);
   const overview = mergeContent(DEFAULTS.overview, activeContent.overview);
   const programs = activeContent.programs?.length ? activeContent.programs : DEFAULTS.programs;
@@ -114,6 +121,21 @@ const DepartmentEnglish = () => {
                   Download Brochure
                 </Button>
               </div>
+            </div>
+          </div>
+        </section>
+      </E>
+        {/* Quick Stats */}
+      <E sectionKey="stats" label="Statistics">
+        <section className="py-8 bg-muted/50">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {stats.map((stat, idx) => (
+                <div key={idx} className="text-center">
+                  <div className="text-3xl font-bold text-primary">{stat.value}</div>
+                  <div className="text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

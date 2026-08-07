@@ -8,6 +8,7 @@ import DepartmentEvents from "@/components/department/DepartmentEvents";
 import { useDepartmentContent, mergeContent } from "@/hooks/useDepartmentContent";
 import { useEditMode } from "@/contexts/EditModeContext";
 import EditableSection from "@/components/admin/EditableSection";
+import { Badge } from "@/components/ui/badge";
 
 export const JOURNALISM_DEFAULTS = {
   hero: {
@@ -15,6 +16,12 @@ export const JOURNALISM_DEFAULTS = {
     title: "Department of Journalism and Media Studies",
     subtitle: "Producing skilled journalists and media professionals for Bangladesh's dynamic media landscape.",
   },
+   stats: [
+    { value: "500+", label: "Graduates" },
+    { value: "10", label: "Faculty Members" },
+    { value: "10", label: "Programs Offered" },
+    { value: "20+", label: "Publications" },
+  ],
   chairman: {
     name: "Prof. Dr. Rezaul Karim",
     designation: "Chairman & Professor",
@@ -67,6 +74,7 @@ const DepartmentJournalism = () => {
   const activeContent = editMode?.isEditMode ? (editMode.content || {}) : dbContent;
 
   const hero = mergeContent(DEFAULTS.hero, activeContent.hero);
+  const stats = activeContent.stats?.length ? activeContent.stats : DEFAULTS.stats;
   const chairman = mergeContent(DEFAULTS.chairman, activeContent.chairman);
   const overview = mergeContent(DEFAULTS.overview, activeContent.overview);
   const programs = activeContent.programs?.length ? activeContent.programs : DEFAULTS.programs;
@@ -100,19 +108,41 @@ const DepartmentJournalism = () => {
     <div className="min-h-screen bg-background">
       {!editMode?.isEditMode && <Header />}
       
-      <E sectionKey="hero" label="Hero Section">
-        <section className="relative bg-gradient-to-r from-primary to-primary/80 text-primary-foreground py-16">
+     <E sectionKey="hero" label="Hero Section">
+        <section className="relative bg-gradient-to-r from-primary to-primary/80 text-primary-foreground py-20">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl">
-              <p className="text-accent font-medium mb-2">{hero.badge}</p>
+              <Badge className="mb-4 bg-accent text-accent-foreground">{hero.badge}</Badge>
               <h1 className="font-heading text-4xl md:text-5xl font-bold mb-4">{hero.title}</h1>
-              <p className="text-primary-foreground/80 text-lg max-w-2xl">{hero.subtitle}</p>
+              
+              <p className="text-xl text-primary-foreground/90 mb-6">{hero.subtitle}</p>
+            <div className="flex flex-wrap gap-4">
+                <Button className="bg-highlight hover:bg-highlight/90 text-highlight-foreground">
+  Apply Now
+</Button>
+                <Button variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10">
+                  Download Brochure
+                </Button>
+              </div>
             </div>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent" />
         </section>
       </E>
-
+        {/* Quick Stats */}
+      <E sectionKey="stats" label="Statistics">
+        <section className="py-8 bg-muted/50">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {stats.map((stat, idx) => (
+                <div key={idx} className="text-center">
+                  <div className="text-3xl font-bold text-primary">{stat.value}</div>
+                  <div className="text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </E>
       <div className="container mx-auto px-4 py-12">
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-10">

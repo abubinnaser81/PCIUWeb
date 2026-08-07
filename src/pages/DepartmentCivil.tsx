@@ -15,6 +15,12 @@ export const CIVIL_DEFAULTS = {
     title: "Department of Civil Engineering",
     subtitle: "Building the future through innovation in civil engineering education and sustainable infrastructure development.",
   },
+  stats: [
+    { value: "500+", label: "Graduates" },
+    { value: "10", label: "Faculty Members" },
+    { value: "10", label: "Programs Offered" },
+    { value: "20+", label: "Publications" },
+  ],
   chairman: {
     name: "Prof. Dr. Abdul Karim",
     designation: "Chairman & Professor",
@@ -67,6 +73,7 @@ const DepartmentCivil = () => {
   const activeContent = editMode?.isEditMode ? (editMode.content || {}) : dbContent;
 
   const hero = mergeContent(DEFAULTS.hero, activeContent.hero);
+  const stats = activeContent.stats?.length ? activeContent.stats : DEFAULTS.stats;
   const chairman = mergeContent(DEFAULTS.chairman, activeContent.chairman);
   const overview = mergeContent(DEFAULTS.overview, activeContent.overview);
   const programs = activeContent.programs?.length ? activeContent.programs : DEFAULTS.programs;
@@ -99,7 +106,7 @@ const DepartmentCivil = () => {
   return (
     <div className="min-h-screen bg-background">
       {!editMode?.isEditMode && <Header />}
-      
+
       <E sectionKey="hero" label="Hero Section">
         <section className="relative bg-gradient-to-r from-primary to-primary/80 text-primary-foreground py-20">
           <div className="container mx-auto px-4">
@@ -116,6 +123,22 @@ const DepartmentCivil = () => {
                   Download Brochure
                 </Button>
               </div>
+            </div>
+          </div>
+        </section>
+      </E>
+
+      {/* Quick Stats */}
+      <E sectionKey="stats" label="Statistics">
+        <section className="py-8 bg-muted/50">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {stats.map((stat, idx) => (
+                <div key={idx} className="text-center">
+                  <div className="text-3xl font-bold text-primary">{stat.value}</div>
+                  <div className="text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
